@@ -489,7 +489,7 @@ input[type="checkbox"]:checked ~ .bar .middle{
     justify-content: center;
   }
   
-  #middleContainer {
+#middleContainer {
     background: transparent;
     padding: 10px;
     max-width: 80%; /* Add this to set the maximum width of the container */
@@ -499,8 +499,8 @@ input[type="checkbox"]:checked ~ .bar .middle{
 #leftContainer{
     position: absolute;
     left: 20px;
-    bottom: 50%;
-    background: transparent;
+    bottom: 80%;
+    background: lightblue;
     padding: 10px;
 }
 
@@ -539,6 +539,42 @@ input[type="checkbox"]:checked ~ .bar .middle{
     padding: 0px 10px;
     user-select: none;
 }
+
+#chatBoxContainer {
+    background-color: lightblue;
+    padding: 20px;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-y: auto;
+    max-height: 300px;
+    margin-bottom: 20px;
+  }
+  
+  #chatForm {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  #userMessage {
+    flex-grow: 1;
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+  }
+  
+  #chatForm button[type="submit"] {
+    padding: 5px 10px;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
 
 #toggleUploadFormButton::before{
     content: attr(data-link);
