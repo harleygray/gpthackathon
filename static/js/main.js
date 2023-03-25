@@ -132,27 +132,6 @@ $(document).ready(function() {
 });
 
 
-//$(document).ready(function() {
-//  $("#chatForm").on("submit", function(event) {
-//    event.preventDefault();
-//
-//    let userMessage = $("#userMessage").val();
-//
-//    $.ajax({
-//        url: "/send_message",
-//        method: "POST",
-//        data: {
-//            user_message: userMessage
-//        },
-//        success: function(response) {
-//            displayResults(response);
-//        }
-//    });
-//  });
-//  $("#toggleUploadFormButton").on("click", toggleUploadForm);
-//  $("#toggleChatBoxButton").on("click", toggleChatBox);
-//});
-
 function displayResults(response) {
     const resultsContainer = document.getElementById("resultsContainer");
   
@@ -162,16 +141,15 @@ function displayResults(response) {
     console.log(response);
 
     // Iterate over the results and display them
-    for (const key in response.message) {
-        if (response.hasOwnProperty(key)) {
-          const result = response[key];
-          console.log(result.page_content);
-          const resultDiv = document.createElement("div");
-          resultDiv.classList.add("text-block");
-          resultDiv.innerHTML = result.page_content;
-          resultsContainer.appendChild(resultDiv);
-        }
-      }
+    for (key in response.message) {
+        const result = response[key];
+        console.log(result.page_content);
+        const resultDiv = document.createElement("div");
+        resultDiv.classList.add("text-block");
+        resultDiv.innerHTML = result.page_content;
+        resultsContainer.appendChild(resultDiv);
+    }
+
 }
   
 

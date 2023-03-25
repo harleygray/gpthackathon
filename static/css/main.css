@@ -118,14 +118,17 @@ body{
     overflow-y: auto; /* Add this to enable vertical scrolling if the content is too long */
 }
     
-#leftContainer{
-      position: absolute;
-      left: 20px;
-      bottom: 80%;
-      top: 80%;
-      background: lightblue;
-      padding: 10px;
-}
+#leftContainer {
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    width: calc(50% - 20px);
+    background: lightblue;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  
 
   
 #bottomLeftContainer{
