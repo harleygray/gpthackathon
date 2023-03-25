@@ -165,7 +165,7 @@ function displayResults(response) {
     for (const key in response) {
         if (response.hasOwnProperty(key)) {
           const result = response[key];
-          console.log(result);
+          console.log(result.page_content);
           const resultDiv = document.createElement("div");
           resultDiv.classList.add("text-block");
           resultDiv.innerHTML = result.page_content;
