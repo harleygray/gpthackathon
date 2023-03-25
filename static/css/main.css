@@ -51,7 +51,17 @@ body{
     z-index: 99999999999999999999999999999999999999999999999999999999999999999999;
 }
 
-
+#resultsContainer {
+    background-color: #f8f8f8; /* Light background color */
+    border: 1px solid #ccc; /* Border around the container */
+    border-radius: 4px; /* Rounded corners */
+    padding: 20px; /* Add some padding inside the container */
+    margin-bottom: 20px; /* Add some space below the container */
+    overflow-y: auto; /* Enable vertical scrolling if the content is too long */
+    max-height: 500px; /* Set a maximum height for the container */
+    width: 100%; /* Take up the full width of the parent container */
+}
+  
 #menuBottomLeftContainer{
     position: absolute;
     left: 20px;
@@ -72,49 +82,50 @@ body{
 #leftContainerWrapper {
     position: fixed;
     left: 25%; /* Move the container to the middle */
-    top: 0;
+    top: 25%;
     right: 25%; /* Move the container to the middle */
-    bottom: 0;
+    bottom: 25%;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: rgba(92, 110, 114, 0.5); /* Optional: add a semi-transparent background */
-  }
+}
   
   
-  
-  #mainContainer {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh; /* This ensures that the main container takes up at least the full viewport height */
-    }
+
+#mainContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* This ensures that the main container takes up at least the full viewport height */
+}
     
   
-  #middleContainerWrapper {
-      left: 0;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+#middleContainerWrapper {
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
     
-  #middleContainer {
-      background: transparent;
-      padding: 10px;
-      max-width: 80%; /* Add this to set the maximum width of the container */
-      overflow-y: auto; /* Add this to enable vertical scrolling if the content is too long */
-    }
+#middleContainer {
+    background: transparent;
+    padding: 10px;
+    max-width: 80%; /* Add this to set the maximum width of the container */
+    overflow-y: auto; /* Add this to enable vertical scrolling if the content is too long */
+}
     
-  #leftContainer{
+#leftContainer{
       position: absolute;
       left: 20px;
       bottom: 80%;
+      top: 80%;
       background: lightblue;
       padding: 10px;
-  }
+}
 
   
 #bottomLeftContainer{
