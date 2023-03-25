@@ -142,7 +142,7 @@ function displayResults(response) {
 
     // Iterate over the results and display them
     for (key in response.message) {
-        const result = response[key];
+        const result = response.message[key];
         console.log(result.page_content);
         const resultDiv = document.createElement("div");
         resultDiv.classList.add("text-block");

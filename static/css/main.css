@@ -121,8 +121,8 @@ body{
 #leftContainer {
     position: absolute;
     left: 20px;
-    top: 0;
-    bottom: 0;
+    top: 100;
+    bottom: 100;
     width: calc(50% - 20px);
     background: lightblue;
     padding: 10px;
