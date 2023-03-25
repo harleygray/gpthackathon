@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/static/css/main.css">
+  <title>Document Q&A</title>
+</head>
+<body>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" integrity="sha384-9/D4ECZvKMVEJ9Bhr3ZnUAF+Ahlagp1cyPC7h5yDlZdXs4DQ/vRftzfd+2uFUuqS"
+	 crossorigin="anonymous">
+  </script>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer>
+  </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5//JF99Idj9TkIFIujubpuzp6vda69/1wDcmdTwt" crossorigin="anonymous"></script>
+  <script src="/static/js/main.js" defer></script>
+
+  <!-- Symbols -->
+  <div id="loadOverlay"></div>
+  <div id="navbar">
+    <h2 id="logo" data-text="Hackathon">Hackathon</h2>
+    <div id="menuIcon">
+      <label>
+        <input id="menuClick" type="checkbox">
+          <div class="bar">
+            <span class="top"></span>
+              <span class="middle"></span>
+                <span class="bottom"></span>
+          </div>
+      </label>
+    </div>
+  </div>
+
+  <!-- Menu -->
+  <div class="menuContainer">
+    <div id="cWrapper">
+      <div id="contactsWrapper">
+        <a class="contact">
+          <div id="contactLinkText">Email</div>
+          <div id="contactHoverOverlay"></div>
+        </a>
+        <a class="contact">
+          <div id="contactLinkText">Chat</div>
+          <div id="contactHoverOverlay"></div>
+        </a>
+        <a class="contact">
+          <div id="contactLinkText">Form</div>
+          <div id="contactHoverOverlay"></div>
+        </a>
+      </div>
+    </div>
+    <div id="menuLine"></div>
+    <div id="menuLinks">
+      <a href="#" class="menuLink">
+        <div class="underLine"></div>
+        <h1 id="menuLinkText">Home</h1>
+      </a>
+      <a href="#" class="menuLink">
+        <div class="underLine"></div>
+        <h1 id="menuLinkText">About</h1>
+      </a>
+      <a href="#" class="menuLink">
+        <div class="underLine"></div>
+        <h1 id="menuLinkText">Projects</h1>
+      </a>
+      <a href="#" class="menuLink">
+        <div class="underLine"></div>
+        <h1 id="menuLinkText">Services</h1>
+      </a>
+      <a href="#" class="menuLink">
+        <div class="underLine"></div>
+        <h1 id="menuLinkText">Contact</h1>
+      </a>
+    </div>
+    <div id="menuBottomLeftContainer">
+      <div id="menuBottomLeftContainerTitleText">Email Us</div>
+      <a href="#" id="emailUsLink">
+        <h2 id="emailText">devbuilds@gmail.com</h2>
+        <div id="emailUsLinkUnderline">
+          <div id="emailUsInnerUnderline"></div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div id="header">
+    <div id="topRightContainer">
+      <div id="bubbleWrapper">
+        <span id="bubble"></span>
+        <span id="bubble"></span>
+        <span id="bubble"></span>
+        <span id="bubble"></span>
+        <span id="bubble"></span>
+        <span id="bubble"></span>
+        <span id="bubble"></span>
+      </div>
+      <div id="bigLetter">GPT</div>
+    </div>
+
+
+  <!--Upload section-->
+  <div id="leftContainerWrapper">
+    <div id="leftContainer">
+      <div id="uploadFormContainer" style="display: none;">
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+          <input type="file" name="pdf_file" accept=".pdf" required>
+          <button type="submit">Upload and Convert</button>
+        </form>
+      </div>
+      <!-- Chat box -->
+      <div id="chatBoxContainer" style="display: none;">
+        <form action="/send_message" id="chatForm" method="POST">
+            <input type="text" name="user_message" id="userMessage" placeholder="Type your question..." required>
+            <button type="submit">Send</button>
+        </form>
+      </div>
+
+      <div id="searchResults"></div>
+    </div>
+  </div>
+    
+  </div> 
+
+
+  <!--Document section--->
+  <div id="middleContainerWrapper">
+    <div id="middleContainer">
+      <div class="text-container" id="textContainer"></div>
+        {% for block in text_blocks %}
+        <div class="text-block">
+          {{ block|safe }}
+        </div>
+        {% endfor %}
+
+    </div>
+  </div>
+    
+  <!---->
+  <div id="bottomLeftContainer">
+    <div id="bottomLeftTitle">▼</div>
+    <div id="servicesLinkWrapper">
+      <a href="#" id="toggleUploadFormButton" data-link="Upload PDF" onclick="toggleUploadForm();">
+        Upload PDF
+        <div id="serviceLinkOverlay"></div>
+      </a>
+
+      <a href="#" id="bottomLeftSeperator"></a>
+      <a href="#" id="toggleChatBoxButton" data-link="Ask Question" onclick="toggleChatBox();">
+          Ask Question
+          <div id="serviceLinkOverlay"></div>
+      </a>
+    </div>
+    </div>
+  
+  </div>
+  <!---->
+  <div id="cursor"></div>
+  <!---->
+
+  
+  
+
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="/static/js/main.js"></script>
+</body>
+</html>
