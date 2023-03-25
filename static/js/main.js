@@ -123,8 +123,7 @@ $(document).ready(function() {
         },
         success: function(response) {
             // Display the user message in the middle of the webpage
-            const resultDiv = document.getElementById("searchResults");
-            resultDiv.innerHTML = response.message;
+            displayResults(response)
         }
     });
   });
@@ -167,7 +166,7 @@ function displayResults(response) {
       resultDiv.innerHTML = result.page_content;
       resultsContainer.appendChild(resultDiv);
     }
-  }
+}
   
 
 
