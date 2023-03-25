@@ -19,32 +19,24 @@
 
 
   <!--Upload section-->
-  <div id="leftContainerWrapper">
-    <div id="leftContainer">
-      <div id="uploadFormContainer" style="display: none;">
-        <form action="/upload" method="POST" enctype="multipart/form-data">
-          <input type="file" name="pdf_file" accept=".pdf" required>
-          <button type="submit">Upload and Convert</button>
-        </form>
-      </div>
-      <!-- Chat box -->
-      <div id="chatBoxContainer" style="display: none;">
-        <form action="/send_message" id="chatForm" method="POST">
-            <input type="text" name="user_message" id="userMessage" placeholder="Type your question..." required>
-            <button type="submit">Send</button>
-        </form>
-        <div id="mainContainer">
-          <!--Document section--->
-          <div id="middleContainerWrapper">
-            <div id="middleContainer">
-              <div class="text-container" id="resultsContainer"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="searchResults"></div>
+  <div id="leftContainer">
+    <div id="uploadFormContainer" style="display: none;">
+      <form action="/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="pdf_file" accept=".pdf" required>
+        <button type="submit">Upload and Convert</button>
+      </form>
     </div>
+    <!-- Chat box -->
+    <div id="chatBoxContainer" style="display: none;">
+      <form action="/send_message" id="chatForm" method="POST">
+          <input type="text" name="user_message" id="userMessage" placeholder="Type your question..." required>
+          <button type="submit">Send</button>
+          
+      </form>
+      
+    </div>
+    <div class="text-container" id="resultsContainer"></div>
+    
   </div>
     
   </div> 
