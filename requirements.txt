@@ -1,0 +1,14 @@
+Flask
+jwt
+openai
+pinecone-client
+requests
+Werkzeug==2.1.1
+langchain
+beautifulsoup4
+pypdf
+PyPDF2
+pinecone-client
+pydantic
+PyCryptodome
+httpx
