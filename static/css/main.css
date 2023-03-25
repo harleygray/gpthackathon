@@ -499,7 +499,7 @@ input[type="checkbox"]:checked ~ .bar .middle{
 #leftContainer{
     position: absolute;
     left: 20px;
-    bottom: 100px;
+    bottom: 50%;
     background: transparent;
     padding: 10px;
 }
