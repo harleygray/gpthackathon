@@ -160,12 +160,15 @@ function displayResults(response) {
     resultsContainer.innerHTML = "";
   
     // Iterate over the results and display them
-    for (const result of response.results) {
-      const resultDiv = document.createElement("div");
-      resultDiv.classList.add("text-block");
-      resultDiv.innerHTML = result.page_content;
-      resultsContainer.appendChild(resultDiv);
-    }
+    for (const key in response) {
+        if (response.hasOwnProperty(key)) {
+          const result = response[key];
+          const resultDiv = document.createElement("div");
+          resultDiv.classList.add("text-block");
+          resultDiv.innerHTML = result.page_content;
+          resultsContainer.appendChild(resultDiv);
+        }
+      }
 }
   
 
