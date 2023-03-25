@@ -89,7 +89,7 @@ def send_message():
   index_name = "pwc-risk"  # Replace this with your index name
   results = query_index(query, n_results, index_name)
   logging.info(results)
-  return jsonify({"message": query})
+  return jsonify({"message": results})
   
  
 #
