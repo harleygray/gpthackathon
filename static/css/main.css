@@ -483,20 +483,23 @@ input[type="checkbox"]:checked ~ .bar .middle{
 }
 
 #middleContainerWrapper {
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center; /* This centers the child vertically */
-  justify-content: center;
-}
-
-#middleContainer {
-  background: transparent;
-  padding: 10px;
-}
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  #middleContainer {
+    background: transparent;
+    padding: 10px;
+    max-width: 80%; /* Add this to set the maximum width of the container */
+    overflow-y: auto; /* Add this to enable vertical scrolling if the content is too long */
+  }
+  
 
 
 #bottomLeftContainer{
