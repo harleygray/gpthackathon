@@ -115,6 +115,14 @@
             <input type="text" name="user_message" id="userMessage" placeholder="Type your question..." required>
             <button type="submit">Send</button>
         </form>
+        <div id="mainContainer">
+          <!--Document section--->
+          <div id="middleContainerWrapper">
+            <div id="middleContainer">
+              <div class="text-container" id="resultsContainer"></div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div id="searchResults"></div>
@@ -124,14 +132,7 @@
   </div> 
 
 
-  <div id="mainContainer">
-    <!--Document section--->
-    <div id="middleContainerWrapper">
-      <div id="middleContainer">
-        <div class="text-container" id="resultsContainer"></div>
-      </div>
-    </div>
-  </div>
+
 
 
 
@@ -140,13 +141,13 @@
   <div id="bottomLeftContainer">
     <div id="bottomLeftTitle">▼</div>
     <div id="servicesLinkWrapper">
-      <a href="#" id="toggleUploadFormButton" data-link="Upload PDF" onclick="toggleUploadForm();">
+      <a id="toggleUploadFormButton" data-link="Upload PDF" onclick="toggleUploadForm();">
         Upload PDF
         <div id="serviceLinkOverlay"></div>
       </a>
 
-      <a href="#" id="bottomLeftSeperator"></a>
-      <a href="#" id="toggleChatBoxButton" data-link="Ask Question" onclick="toggleChatBox();">
+      <a id="bottomLeftSeperator"></a>
+      <a id="toggleChatBoxButton" data-link="Ask Question" onclick="toggleChatBox();">
           Ask Question
           <div id="serviceLinkOverlay"></div>
       </a>
