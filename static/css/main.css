@@ -482,8 +482,15 @@ input[type="checkbox"]:checked ~ .bar .middle{
   padding: 10px;
 }
 
+#mainContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* This ensures that the main container takes up at least the full viewport height */
+  }
+  
+
 #middleContainerWrapper {
-    position: fixed;
     left: 0;
     top: 0;
     right: 0;
@@ -599,6 +606,15 @@ input[type="checkbox"]:checked ~ .bar .middle{
     background: #fff;
     transition: 0.7s ease;
 }
+
+.text-container {
+    width: 100%; /* Add this line to set the width */
+    min-height: 50px; /* Add this line to set a minimum height */
+    background-color: white; /* Add this line to set a background color, making it easier to see the div */
+    padding: 10px; /* Add this line to add some padding around the text */
+    overflow-y: auto; /* Add this line to enable vertical scrolling if the content is too long */
+  }
+  
 
 #toggleUploadFormButton:hover{
     -webkit-text-stroke: 0px #000;
