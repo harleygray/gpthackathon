@@ -6,6 +6,10 @@ from embeddings import query_index
 
 import tenacity
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 app = Flask(__name__, static_folder='static')
 app.secret_key = os.environ.get("FLASK_SECRET_KEY", "super_secret_key")
 app.config['UPLOAD_FOLDER'] = 'uploads'

@@ -8,6 +8,10 @@ import pinecone
 import logging
 import sys
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 logging.basicConfig(
     level=logging.DEBUG,
     format='%(asctime)s [%(levelname)s] %(message)s',
@@ -63,9 +67,10 @@ def embed_document(path_to_document, index_name):
 def query_index(query, n_results, index_name):
   embeddings = OpenAIEmbeddings()
   pinecone.init(
-    api_key=os.environ["PINECONE_API_KEY_TEST"],  # find at app.pinecone.io
-    environment=os.environ["PINECONE_ENVIRONMENT_TEST"]  # next to api key in console
+    api_key=os.environ["PINECONE_API_KEY"],  # find at app.pinecone.io
+    environment=os.environ["PINECONE_ENVIRONMENT"]  # next to api key in console
 )
+  logging.info(pinecone.list_indexes())
   docsearch = Pinecone.from_existing_index(index_name, embeddings)
   docs = docsearch.similarity_search(query, n_results)
   #print(docs[0].page_content)

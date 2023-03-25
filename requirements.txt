@@ -12,3 +12,4 @@ pinecone-client
 pydantic
 PyCryptodome
 httpx
+python-dotenv
