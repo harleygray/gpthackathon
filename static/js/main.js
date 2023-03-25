@@ -154,23 +154,21 @@ $(document).ready(function() {
 //  $("#toggleChatBoxButton").on("click", toggleChatBox);
 //});
 
-function displayResults(results) {
-    let resultsContainer = $("#searchResults");
-    resultsContainer.empty();
-
-    for (let i = 0; i < results.length; i++) {
-        let result = results[i];
-        let resultDiv = $("<div>").addClass("result-item");
-        let title = $("<h3>").text(result.title);
-        let content = $("<p>").text(result.page_content);
-        let score = $("<p>").text("Score: " + result.score.toFixed(2));
-
-        resultDiv.append(title);
-        resultDiv.append(content);
-        resultDiv.append(score);
-        resultsContainer.append(resultDiv);
+function displayResults(response) {
+    const resultsContainer = document.getElementById("resultsContainer");
+  
+    // Clear any previous results
+    resultsContainer.innerHTML = "";
+  
+    // Iterate over the results and display them
+    for (const result of response.results) {
+      const resultDiv = document.createElement("div");
+      resultDiv.classList.add("text-block");
+      resultDiv.innerHTML = result.page_content;
+      resultsContainer.appendChild(resultDiv);
     }
-}
+  }
+  
 
 
 

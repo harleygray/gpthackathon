@@ -70,6 +70,7 @@ def query_index(query, n_results, index_name):
     api_key=os.environ["PINECONE_API_KEY"],  # find at app.pinecone.io
     environment=os.environ["PINECONE_ENVIRONMENT"]  # next to api key in console
 )
+  logging.info("Available Indexes: \n")
   logging.info(pinecone.list_indexes())
   docsearch = Pinecone.from_existing_index(index_name, embeddings)
   docs = docsearch.similarity_search(query, n_results)
