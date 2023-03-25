@@ -159,10 +159,13 @@ function displayResults(response) {
     // Clear any previous results
     resultsContainer.innerHTML = "";
   
+    console.log(response);
+
     // Iterate over the results and display them
     for (const key in response) {
         if (response.hasOwnProperty(key)) {
           const result = response[key];
+          console.log(result);
           const resultDiv = document.createElement("div");
           resultDiv.classList.add("text-block");
           resultDiv.innerHTML = result.page_content;
