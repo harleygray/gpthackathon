@@ -162,7 +162,7 @@ function displayResults(response) {
     console.log(response);
 
     // Iterate over the results and display them
-    for (const key in response) {
+    for (const key in response.message) {
         if (response.hasOwnProperty(key)) {
           const result = response[key];
           console.log(result.page_content);
