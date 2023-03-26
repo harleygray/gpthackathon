@@ -47,6 +47,7 @@ logging.basicConfig(
 #print(docs[0].page_content)
 
 def embed_document(path_to_document, index_name):
+  print(f"Embedding document: {path_to_document}")
   loader = TextLoader(path_to_document)
   documents = loader.load()
   text_splitter = CharacterTextSplitter(separator = "\n", chunk_size=1000, chunk_overlap=100)
