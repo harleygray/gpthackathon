@@ -112,15 +112,12 @@ body{
     
 
 #leftContainer {
-    background-color: lightblue;
 }
   
 #middleContainer {
-    background-color: lightgreen;
 }
   
 #rightContainer {
-    background-color: lightcoral;
 }  
 
 .lds-dual-ring {
@@ -198,30 +195,39 @@ body{
     white-space: pre-wrap; /* This makes the text wrap */
 }
   
-  #chatForm {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 10px;
-  }
+#chatForm {
+    width: 100%;
+    resize: none;
+    box-sizing: border-box;
+    min-height: calc(1.2em * 3); /* Adjust the number 3 to change the default number of lines */
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
   
-  #userMessage {
+#userMessage {
     flex-grow: 1;
     padding: 5px;
     border-radius: 3px;
     border: 1px solid #ccc;
     margin-right: 10px;
-  }
+}
   
-  #chatForm button[type="submit"] {
+#chatForm button[type="submit"] {
     padding: 5px 10px;
     background-color: #2196F3;
     color: white;
     border: none;
     border-radius: 3px;
     cursor: pointer;
-  }
+}
   
+.sectionTitle {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+}
 
 #toggleUploadFormButton::before{
     content: attr(data-link);
