@@ -1,8 +1,8 @@
 import os
 from flask import Flask, request, redirect, url_for, flash, render_template, jsonify, make_response
 from werkzeug.utils import secure_filename
-from langchain.document_loaders import PyPDFLoader
-from embeddings import query_index
+from langchain.document_loaders import c
+from embeddings import query_index, embed_document
 from langchain.prompts import PromptTemplate
 from langchain.llms import OpenAI
 from langchain.chains import LLMChain
@@ -93,10 +93,18 @@ def upload_file():
 
         txt_filename = os.path.splitext(filename)[0] + '.txt'
         txt_file_path = os.path.join(app.config['CONVERTED_FOLDER'], txt_filename)
-        with open(txt_file_path, 'w') as txt_file:
-            txt_file.write(text_content)
+        # Check if the document has already been uploaded and processed
+        if not os.path.exists(txt_file_path):
+            with open(txt_file_path, 'w') as txt_file:
+                txt_file.write(text_content)
 
-        flash('File uploaded and converted successfully')
+            # Embed the document
+            embed_document(txt_file_path, INDEX_NAME)
+
+            flash('File uploaded and converted successfully')
+        else:
+            flash('File already uploaded and processed')
+
         return redirect(url_for('index'))
     else:
         flash('Invalid file format')
@@ -120,9 +128,6 @@ def send_message():
   else:
     return jsonify({"message": "No message provided"})
 
-  #results = query_index(query, n_results, index_name)
-  #logging.info(results)
-  #return jsonify({"message": results})
 
 
 

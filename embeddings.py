@@ -55,8 +55,8 @@ def embed_document(path_to_document, index_name):
 
   # Initialize pinecone
   pinecone.init(
-    api_key=os.environ["PINECONE_API_KEY"],  # find at app.pinecone.io
-    environment=os.environ["PINECONE_ENVIRONMENT"]  # next to api key in console
+    api_key=os.environ["PINECONE_API_KEY"],  
+    environment=os.environ["PINECONE_ENVIRONMENT"]  
 )
 
   docsearch = Pinecone.from_documents(docs, embeddings, index_name=index_name)

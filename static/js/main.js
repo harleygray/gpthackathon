@@ -109,6 +109,56 @@ function toggleChatBox() {
   }
 }
 
+const uploadForm = document.querySelector("#uploadFormContainer form");
+uploadForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  // Display the progress wheel
+  const progressWheelContainer = document.getElementById("progressWheelContainer");
+  const progressWheel = document.getElementById("progressWheel");
+  const uploadMessage = document.getElementById("uploadMessage");
+  progressWheelContainer.style.display = "block";
+  progressWheel.style.display = "inline-block";
+  uploadMessage.style.display = "none";
+
+  // Create a FormData object to send the file
+  const formData = new FormData();
+  formData.append("pdf_file", event.target.pdf_file.files[0]);
+
+  // Send the file using a fetch request
+  fetch("/upload", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => {
+      if (response.ok) {
+        // Hide the progress wheel and display the "Done!" message
+        progressWheel.style.display = "none";
+        uploadMessage.style.display = "block";
+        uploadMessage.textContent = "Done!";
+        uploadMessage.style.color = "green";
+        setTimeout(() => {
+          progressWheelContainer.style.display = "none";
+        }, 3000);
+      } else {
+        throw new Error("Upload failed");
+      }
+    })
+    .catch((error) => {
+      console.error("Error uploading file:", error);
+      progressWheel.style.display = "none";
+      uploadMessage.style.display = "block";
+      uploadMessage.textContent = "Error!";
+      uploadMessage.style.color = "red";
+      setTimeout(() => {
+        progressWheelContainer.style.display = "none";
+      }, 3000);
+    });
+});
+
+
+
+
 $(document).ready(function() {
   $("#chatForm").on("submit", function(event) {
     event.preventDefault();
