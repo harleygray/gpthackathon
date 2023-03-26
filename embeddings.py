@@ -92,11 +92,6 @@ def query_index(query, n_results, index_name):
       for index, doc in enumerate(filtered_docs)
   }
 
-
-
-
-
-  
   return docs_dict
 
 #embed_document('./converted_files/2021-alp-national-platform-final-endorsed-platform.txt', 'pwc-risk')

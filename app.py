@@ -3,8 +3,12 @@ from flask import Flask, request, redirect, url_for, flash, render_template, jso
 from werkzeug.utils import secure_filename
 from langchain.document_loaders import PyPDFLoader
 from embeddings import query_index
+from langchain.prompts import PromptTemplate
+from langchain.llms import OpenAI
+from langchain.chains import LLMChain
+from langchain.chat_models import ChatOpenAI
+from langchain.prompts.chat import ChatPromptTemplate, HumanMessagePromptTemplate
 
-import tenacity
 
 from dotenv import load_dotenv
 
@@ -30,6 +34,25 @@ logging.basicConfig(
   ]
 )
 
+
+# Initialize LLM
+llm = ChatOpenAI(temperature=0.9)
+
+# Set up the initial prompt template
+initial_qa_template = (
+    "Context information is below. \n"
+    "---------------------\n"
+    "{context_str}"
+    "\n---------------------\n"
+    "Given the context information and not prior knowledge, "
+    "answer the question: {question}"
+)
+initial_qa_prompt = PromptTemplate(input_variables=["context_str", "question"], template=initial_qa_template)
+
+# Set up the LLMChain
+human_message_prompt = HumanMessagePromptTemplate(prompt=initial_qa_prompt)
+chat_prompt_template = ChatPromptTemplate.from_messages([human_message_prompt])
+chain = LLMChain(llm=llm, prompt=chat_prompt_template)
 
 def allowed_file(filename):
   return '.' in filename and filename.rsplit('.', 1)[1].lower() == 'pdf'
@@ -83,12 +106,23 @@ def upload_file():
 
 @app.route("/send_message", methods=["POST"])
 def send_message():
-  query = request.form["user_message"]
+  user_message = request.form["user_message"]
   n_results = 5  
   index_name = "pwc-risk"  # Replace this with your index name
-  results = query_index(query, n_results, index_name)
-  logging.info(results)
-  return jsonify({"message": results})
+
+  if user_message:
+    query = user_message
+    query_result = query_index(query, n_results, index_name)
+    context_str = "\n\n".join([doc["page_content"] for doc in query_result.values()])
+    response = chain.run({"context_str": context_str, "question": query})
+    
+    return jsonify({"message": query_result, "answer": response})
+  else:
+    return jsonify({"message": "No message provided"})
+
+  #results = query_index(query, n_results, index_name)
+  #logging.info(results)
+  #return jsonify({"message": results})
 
 
 

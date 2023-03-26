@@ -133,6 +133,10 @@ $(document).ready(function() {
 
 
 function displayResults(response) {
+    // Display the answer in the semanticAnswer div
+    const semanticAnswer = document.getElementById("semanticAnswer");
+    semanticAnswer.innerHTML = response.answer;
+
     // Get the results container
     const resultsContainer = document.getElementById("resultsContainer");
     resultsContainer.innerHTML = "";
