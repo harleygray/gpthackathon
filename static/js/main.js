@@ -139,7 +139,7 @@ function displayResults(response) {
   
     // Iterate over the results and display them
     for (key in response.message) {
-      const result = response[key];
+      const result = response.message[key];
       const resultDiv = document.createElement("details");
       resultDiv.classList.add("source");
       const summary = document.createElement("summary");
