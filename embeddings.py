@@ -48,11 +48,10 @@ logging.basicConfig(
 
 def embed_document(filename, text_content, index_name):
     print(f"Embedding document: {filename}")
-    delimiter = "<FILENAME_DELIMITER>"
-    content_with_filename = f"{filename}{delimiter}{text_content}"
-    documents = [content_with_filename]
+    
     text_splitter = CharacterTextSplitter(separator="\n", chunk_size=1000, chunk_overlap=100)
-    docs = text_splitter.split_documents(documents)
+    docs = text_splitter.split(text_content)
+    
     embeddings = OpenAIEmbeddings()
 
     # Initialize pinecone
@@ -62,7 +61,6 @@ def embed_document(filename, text_content, index_name):
     )
 
     docsearch = Pinecone.from_documents(docs, embeddings, index_name=index_name)
-
 
 
 
