@@ -86,29 +86,24 @@ $(document).on('mouseup', () => {
 })
 
 function toggleUploadForm() {
-  const uploadFormContainer = document.getElementById("uploadFormContainer");
-  const chatBoxContainer = document.getElementById("chatBoxContainer");
-
-  if (uploadFormContainer.style.display === "none") {
+    const uploadFormContainer = document.getElementById("uploadFormContainer");
+    const chatBoxContainer = document.getElementById("chatBoxContainer");
+  
     uploadFormContainer.style.display = "block";
     chatBoxContainer.style.display = "none";
-  } else {
-    uploadFormContainer.style.display = "none";
-  }
 }
-
+  
 function toggleChatBox() {
-  const uploadFormContainer = document.getElementById("uploadFormContainer");
-  const chatBoxContainer = document.getElementById("chatBoxContainer");
+const uploadFormContainer = document.getElementById("uploadFormContainer");
+const chatBoxContainer = document.getElementById("chatBoxContainer");
 
-  if (chatBoxContainer.style.display === "none") {
-    chatBoxContainer.style.display = "block";
-    uploadFormContainer.style.display = "none";
-  } else {
-    chatBoxContainer.style.display = "none";
-  }
+uploadFormContainer.style.display = "none";
+chatBoxContainer.style.display = "block";
 }
-
+  
+document.getElementById("toggleUploadFormButton").addEventListener("click", toggleUploadForm);
+document.getElementById("toggleChatBoxButton").addEventListener("click", toggleChatBox);
+  
 const pdfUploadForm = document.querySelector("#uploadFormContainer form");
 pdfUploadForm.addEventListener("submit", (event) => {
   event.preventDefault();
