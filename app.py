@@ -116,7 +116,7 @@ def upload_file():
         # Insert file and its text content into MongoDB
         file_document = {
             'filename': filename,
-            'content': text_content,
+            'content': '\n'.join(pages_content),
             'pdf_file': pdf_binary
         }
         file_collection.insert_one(file_document)
