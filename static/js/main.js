@@ -187,23 +187,28 @@ function displayResults(response) {
     resultsContainer.innerHTML = "";
   
     // Iterate over the results and display them
-    for (key in response.message) {
-      const result = response.message[key];
-      const resultDiv = document.createElement("details");
-      resultDiv.classList.add("source");
-      const summary = document.createElement("summary");
-      summary.textContent = "Source " + (parseInt(key) + 1);
-      resultDiv.appendChild(summary);
-      
-      const metadata = document.createElement("pre");
-      metadata.textContent = JSON.stringify(result.metadata, null, 2);
-      resultDiv.appendChild(metadata);
-      
-      const pageContent = document.createElement("div");
-      pageContent.innerHTML = result.page_content;
-      resultDiv.appendChild(pageContent);
-  
-      resultsContainer.appendChild(resultDiv);
+  for (key in response.message) {
+    const result = response.message[key];
+    const resultDiv = document.createElement("details");
+    resultDiv.classList.add("source");
+    const summary = document.createElement("summary");
+
+    // Get the file name without the extension
+    const fileName = result.metadata.filename.replace(/\.[^/.]+$/, "");
+
+    summary.textContent = "Source " + (parseInt(key) + 1) + ": " + fileName;
+    resultDiv.appendChild(summary);
+
+    // Remove the metadata section
+    // const metadata = document.createElement("pre");
+    // metadata.textContent = JSON.stringify(result.metadata, null, 2);
+    // resultDiv.appendChild(metadata);
+
+    const pageContent = document.createElement("div");
+    pageContent.innerHTML = result.page_content;
+    resultDiv.appendChild(pageContent);
+
+    resultsContainer.appendChild(resultDiv);
     }
   }
   

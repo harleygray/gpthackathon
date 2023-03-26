@@ -193,9 +193,10 @@ body{
     width: 100%;
     box-sizing: border-box;
     overflow-y: auto;
-    max-height: 300px;
+    height: calc(100% - 60px); /* Adjust this value according to your layout */
     margin-bottom: 20px;
-  }
+    white-space: pre-wrap; /* This makes the text wrap */
+}
   
   #chatForm {
     display: flex;
