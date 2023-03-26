@@ -74,6 +74,9 @@ def allowed_file(filename):
 def index():
   return render_template('index.html')
 
+import os
+import tempfile
+
 @app.route('/upload', methods=['POST'])
 def upload_file():
     logging.info("Upload request received.")
@@ -90,15 +93,14 @@ def upload_file():
     if file and allowed_file(file.filename):
         logging.info(f"Processing file: {file.filename}")
         filename = secure_filename(file.filename)
-        
-        # Read file contents
-        file_content = file.read()
 
-        # Store the original PDF file as a Binary object in MongoDB
-        pdf_binary = Binary(file_content)
+        # Save the file temporarily
+        temp_dir = tempfile.mkdtemp()
+        temp_path = os.path.join(temp_dir, filename)
+        file.save(temp_path)
 
         # Load and split PDF using LangChain's PyPDFLoader
-        loader = PyPDFLoader(file=io.BytesIO(file_content))
+        loader = PyPDFLoader(file_path=temp_path)
         pages = loader.load_and_split()
 
         # Combine pages into one string
@@ -116,7 +118,11 @@ def upload_file():
         }
         file_collection.insert_one(file_document)
 
-        flash('File uploaded and converted successfully')
+        # Remove the temporary file and directory
+        os.remove(temp_path)
+        os.rmdir(temp_dir)
+
+        flash('File uploaded, converted, and embedded successfully')
         return redirect(url_for('index'))
     else:
         flash('Invalid file format')
