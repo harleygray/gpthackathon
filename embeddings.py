@@ -47,8 +47,9 @@ logging.basicConfig(
 #print(docs[0].page_content)
 
 class TextWrapper:
-    def __init__(self, text):
+    def __init__(self, text, metadata=None):
         self.page_content = text
+        self.metadata = metadata or {}
 
 
 def embed_document(filename, text_content, index_name):
