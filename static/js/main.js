@@ -109,8 +109,8 @@ function toggleChatBox() {
   }
 }
 
-const uploadForm = document.querySelector("#uploadFormContainer form");
-uploadForm.addEventListener("submit", (event) => {
+const pdfUploadForm = document.querySelector("#uploadFormContainer form");
+pdfUploadForm.addEventListener("submit", (event) => {
   event.preventDefault();
 
   // Display the progress wheel
