@@ -33,7 +33,7 @@ file_collection = db['files']
 
 
 NUMBER_RESULTS = 5
-INDEX_NAME = 'pwc-risk'
+INDEX_NAME = 'gpt-hackathon'
 
 import logging
 import sys
