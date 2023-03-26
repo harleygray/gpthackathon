@@ -133,24 +133,31 @@ $(document).ready(function() {
 
 
 function displayResults(response) {
+    // Get the results container
     const resultsContainer = document.getElementById("resultsContainer");
-  
-    // Clear any previous results
     resultsContainer.innerHTML = "";
   
-    console.log(response);
-
     // Iterate over the results and display them
     for (key in response.message) {
-        const result = response.message[key];
-        console.log(result.page_content);
-        const resultDiv = document.createElement("div");
-        resultDiv.classList.add("text-block");
-        resultDiv.innerHTML = result.page_content;
-        resultsContainer.appendChild(resultDiv);
+      const result = response[key];
+      const resultDiv = document.createElement("details");
+      resultDiv.classList.add("source");
+      const summary = document.createElement("summary");
+      summary.textContent = "Source " + (parseInt(key) + 1);
+      resultDiv.appendChild(summary);
+      
+      const metadata = document.createElement("pre");
+      metadata.textContent = JSON.stringify(result.metadata, null, 2);
+      resultDiv.appendChild(metadata);
+      
+      const pageContent = document.createElement("div");
+      pageContent.innerHTML = result.page_content;
+      resultDiv.appendChild(pageContent);
+  
+      resultsContainer.appendChild(resultDiv);
     }
-
-}
+  }
+  
   
 
 

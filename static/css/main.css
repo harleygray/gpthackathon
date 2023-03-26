@@ -1,10 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
 
+
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
 ::selection{
     color: #fff;
     background: #000;
 }
+
+#appContainer {
+    display: flex;
+    height: 100%;
+}
+
 
 *{
     margin: 0;
@@ -79,17 +91,6 @@ body{
 }
 
 
-#leftContainerWrapper {
-    position: fixed;
-    left: 25%; /* Move the container to the middle */
-    top: 25%;
-    right: 25%; /* Move the container to the middle */
-    bottom: 25%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(92, 110, 114, 0.5); /* Optional: add a semi-transparent background */
-}
   
   
 
@@ -111,24 +112,24 @@ body{
     justify-content: center;
 }
     
-#middleContainer {
-    background: transparent;
-    padding: 10px;
-    max-width: 80%; /* Add this to set the maximum width of the container */
-    overflow-y: auto; /* Add this to enable vertical scrolling if the content is too long */
+#leftContainer, #middleContainer, #rightContainer {
+    flex: 1;
+    padding: 20px;
+    box-sizing: border-box;
 }
     
+
 #leftContainer {
-    position: absolute;
-    left: 20px;
-    top: 100;
-    bottom: 100;
-    width: calc(50% - 20px);
-    background: lightblue;
-    padding: 10px;
-    box-sizing: border-box;
-  }
+    background-color: lightblue;
+}
   
+#middleContainer {
+    background-color: lightgreen;
+}
+  
+#rightContainer {
+    background-color: lightcoral;
+}  
 
   
 #bottomLeftContainer{
@@ -266,12 +267,12 @@ body{
 }
 
 .text-container {
-    width: 100%; /* Add this line to set the width */
-    min-height: 50px; /* Add this line to set a minimum height */
-    background-color: white; /* Add this line to set a background color, making it easier to see the div */
-    padding: 10px; /* Add this line to add some padding around the text */
-    overflow-y: auto; /* Add this line to enable vertical scrolling if the content is too long */
-  }
+    height: 75%;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-sizing: border-box;
+}
   
 
 #toggleUploadFormButton:hover{

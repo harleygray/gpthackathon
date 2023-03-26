@@ -67,24 +67,31 @@ def embed_document(path_to_document, index_name):
 def query_index(query, n_results, index_name):
   embeddings = OpenAIEmbeddings()
   pinecone.init(
-    api_key=os.environ["PINECONE_API_KEY"],  # find at app.pinecone.io
-    environment=os.environ["PINECONE_ENVIRONMENT"]  # next to api key in console
+    api_key=os.environ["PINECONE_API_KEY"],  
+    environment=os.environ["PINECONE_ENVIRONMENT"]  
 )
-  logging.info("Available Indexes: \n")
-  logging.info(pinecone.list_indexes())
   docsearch = Pinecone.from_existing_index(index_name, embeddings)
   docs = docsearch.similarity_search(query, n_results)
   #print(docs[0].page_content)
   #logging.info(docs[0].page_content)
 
-  # Convert Document instances to dictionaries
+  # Only add unique page contents
+  filtered_docs = []
+  seen_page_contents = set()
+
+  for doc in docs:
+      if doc.page_content not in seen_page_contents:
+          seen_page_contents.add(doc.page_content)
+          filtered_docs.append(doc)
+
   docs_dict = {
-    index: {
-        'page_content': doc.page_content,
-        'metadata': doc.metadata
-    }
-    for index, doc in enumerate(docs)
+      index: {
+          'page_content': doc.page_content,
+          'metadata': doc.metadata
+      }
+      for index, doc in enumerate(filtered_docs)
   }
+
 
 
 
@@ -94,4 +101,4 @@ def query_index(query, n_results, index_name):
 
 #embed_document('./converted_files/2021-alp-national-platform-final-endorsed-platform.txt', 'pwc-risk')
 
-query_index("What will Labor do about Climate Change?", 5, "pwc-risk")
+#query_index("What will Labor do about Climate Change?", 5, "pwc-risk")

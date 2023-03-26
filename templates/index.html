@@ -17,30 +17,40 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK" crossorigin="anonymous"></script>
   <script src="/static/js/main.js" defer></script>
 
+  <!--App container-->
+  <div id="appContainer">
+    <!--Left third-->
+    <div id="leftContainer">
+      <!--Upload section-->
+      <div id="uploadFormContainer">
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+          <input type="file" name="pdf_file" accept=".pdf" required>
+          <button type="submit">Upload and Convert</button>
+        </form>
+      </div>
+      <!--Chat section-->
+      <div id="chatBoxContainer" style="display: none;">
+        <form action="/send_message" id="chatForm" method="POST">
+            <input type="text" name="user_message" id="userMessage" placeholder="Type your question..." required>
+            <button type="submit">Send</button>    
+        </form> 
+      </div>
+    </div>
 
-  <!--Upload section-->
-  <div id="leftContainer">
-    <div id="uploadFormContainer" style="display: none;">
-      <form action="/upload" method="POST" enctype="multipart/form-data">
-        <input type="file" name="pdf_file" accept=".pdf" required>
-        <button type="submit">Upload and Convert</button>
-      </form>
+    <!--Middle third-->
+    <div id="middleContainer">
+      <!--Sematic answer section-->
+      <div id="semanticAnswer">Your answer will be displayed here.</div>
     </div>
-    <!-- Chat box -->
-    <div id="chatBoxContainer" style="display: none;">
-      <form action="/send_message" id="chatForm" method="POST">
-          <input type="text" name="user_message" id="userMessage" placeholder="Type your question..." required>
-          <button type="submit">Send</button>
-          
-      </form>
-      
+
+    <!--Right third-->
+    <div id="rightContainer">
+      <!--Sources section-->
+      <div id="resultsContainer"></div>
     </div>
-    <div class="text-container" id="resultsContainer"></div>
-    
+
   </div>
     
-  </div> 
-
 
 
 

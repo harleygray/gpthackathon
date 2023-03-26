@@ -84,25 +84,12 @@ def upload_file():
 @app.route("/send_message", methods=["POST"])
 def send_message():
   query = request.form["user_message"]
-  logging.info(query)
-  n_results = 5  # You can change this to any number you prefer
+  n_results = 5  
   index_name = "pwc-risk"  # Replace this with your index name
   results = query_index(query, n_results, index_name)
   logging.info(results)
   return jsonify({"message": results})
-  
- 
-#
-  #@tenacity.retry(stop=tenacity.stop_after_attempt(5),
-  #              wait=tenacity.wait_exponential(multiplier=1, min=2, max=30),
-  #              retry=tenacity.retry_if_exception_type(ConnectionResetError),
-  #              reraise=True)
-  #def make_request_with_retry():
-  #  results = query_index(query, n_results, index_name)
-  #  return jsonify(results)
-#
-  #return make_request_with_retry()
-  
+
 
 
 
