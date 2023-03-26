@@ -99,6 +99,9 @@ def upload_file():
         temp_path = os.path.join(temp_dir, filename)
         file.save(temp_path)
 
+        # Read the binary content of the uploaded file
+        pdf_binary = file.read()
+
         # Load and split PDF using LangChain's PyPDFLoader
         loader = PyPDFLoader(file_path=temp_path)
         pages = loader.load_and_split()
