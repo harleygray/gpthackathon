@@ -181,38 +181,37 @@ function displayResults(response) {
     // Display the answer in the semanticAnswer div
     const semanticAnswer = document.getElementById("semanticAnswer");
     semanticAnswer.innerHTML = response.answer;
-
+  
     // Get the results container
     const resultsContainer = document.getElementById("resultsContainer");
     resultsContainer.innerHTML = "";
   
     // Iterate over the results and display them
     for (key in response.message) {
-        const result = response.message[key];
-        const resultDiv = document.createElement("details");
-        resultDiv.classList.add("source");
-        const summary = document.createElement("summary");
-
-        // Extract the page number and file name from the page content
-        const pageInfoRegex = /^Page (\d+) of (.*?):/;
-        const pageInfoMatch = result.page_content.match(pageInfoRegex);
-        const pageNumber = pageInfoMatch[1];
-        const fileName = pageInfoMatch[2].replace(/\.[^/.]+$/, "");
-
-        summary.textContent = `Source ${parseInt(key) + 1}: Page ${pageNumber} of ${fileName}`;
-        resultDiv.appendChild(summary);
-
-        const pageContent = document.createElement("div");
-
-        // Remove the prepended page information from the page content
-        const cleanedPageContent = result.page_content.replace(pageInfoRegex, "").trim();
-        pageContent.innerHTML = cleanedPageContent;
-        resultDiv.appendChild(pageContent);
-
-        resultsContainer.appendChild(resultDiv);
-    }
-  }
+      const result = response.message[key];
+      const resultDiv = document.createElement("details");
+      resultDiv.classList.add("source");
+      const summary = document.createElement("summary");
   
+      // Extract the page number and file name from the page content
+      const pageInfoRegex = /Page (\d+) of (.*?):/;
+      const pageInfoMatch = result.page_content.match(pageInfoRegex);
+      const pageNumber = pageInfoMatch[1];
+      const fileName = pageInfoMatch[2].replace(/\.[^/.]+$/, "");
+  
+      summary.textContent = `Source ${parseInt(key) + 1}: Page ${pageNumber} of ${fileName}`;
+      resultDiv.appendChild(summary);
+  
+      const pageContent = document.createElement("div");
+  
+      // Remove the prepended page information from the page content
+      const cleanedPageContent = result.page_content.replace(pageInfoRegex, "").trim();
+      pageContent.innerHTML = cleanedPageContent;
+      resultDiv.appendChild(pageContent);
+  
+      resultsContainer.appendChild(resultDiv);
+    }
+}
   
 
 
