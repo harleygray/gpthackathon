@@ -69,56 +69,11 @@ chain = LLMChain(llm=llm, prompt=chat_prompt_template)
 def allowed_file(filename):
   return '.' in filename and filename.rsplit('.', 1)[1].lower() == 'pdf'
 
-
-
-
-
-
 @app.route('/', methods=['GET'])
 def index():
   return render_template('index.html')
 
 
-    if 'pdf_file' not in request.files:
-        flash('No file part')
-        return redirect(url_for('index'))
-
-    file = request.files['pdf_file']
-
-    if file.filename == '':
-        flash('No file selected')
-        return redirect(url_for('index'))
-
-    if file and allowed_file(file.filename):
-        filename = secure_filename(file.filename)
-        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        file.save(file_path)
-
-        # Load and split PDF using LangChain's PyPDFLoader
-        loader = PyPDFLoader(file_path)
-        pages = loader.load_and_split()
-
-        # Combine pages into one string
-        text_content = '\n'.join([page.page_content for page in pages])
-
-        txt_filename = os.path.splitext(filename)[0] + '.txt'
-        txt_file_path = os.path.join(app.config['CONVERTED_FOLDER'], txt_filename)
-        # Check if the document has already been uploaded and processed
-        if not os.path.exists(txt_file_path):
-            with open(txt_file_path, 'w') as txt_file:
-                txt_file.write(text_content)
-
-            # Embed the document
-            embed_document(txt_file_path, INDEX_NAME)
-
-            flash('File uploaded and converted successfully')
-        else:
-            flash('File already uploaded and processed')
-
-        return redirect(url_for('index'))
-    else:
-        flash('Invalid file format')
-        return redirect(url_for('index'))
 @app.route('/upload', methods=['POST'])
 def upload_file():
     if 'pdf_file' not in request.files:
