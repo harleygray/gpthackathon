@@ -146,7 +146,25 @@ body{
     }
 }
   
-  
+.contentWrapper {
+    border-radius: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+
+#leftContentWrapper {
+    border: 2px solid #e0301e;
+}
+
+#middleContentWrapper {
+    border: 2px solid #eb8c00;
+}
+
+#rightContentWrapper {
+    border: 2px solid #d93954;
+}
+
 #bottomLeftContainer{
     position: absolute;
     left: 20px;
@@ -184,7 +202,6 @@ body{
 }
 
 #chatBoxContainer {
-    background-color: lightblue;
     padding: 20px;
     border-radius: 5px;
     width: 100%;
@@ -227,7 +244,9 @@ body{
     font-weight: bold;
     text-align: center;
     margin-bottom: 10px;
-}
+    height: 40px; /* Adjust the height to make the titles equal height */
+    line-height: 40px; /* Make the line height equal to the height to vertically center the text */
+  }
 
 #toggleUploadFormButton::before{
     content: attr(data-link);

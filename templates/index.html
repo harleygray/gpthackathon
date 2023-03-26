@@ -20,48 +20,49 @@
   <div id="appContainer">
     <!--Left third-->
     <div id="leftContainer">
-      <div id="leftSectionTitle" class="sectionTitle">Input Questions / Documents</div>
-      <!--Upload section-->
-      <div id="uploadFormContainer">
-        <form action="/upload" method="POST" enctype="multipart/form-data">
-          <input type="file" name="pdf_file" accept=".pdf" required>
-          <button type="submit">Upload and Convert</button>
-        </form>
-      </div>
-      <!-- Progress wheel and message container -->
-      <div id="progressWheelContainer" style="display: none;">
-        <div id="progressWheel" class="lds-dual-ring"></div>
-        <div id="uploadMessage" style="display: none;"></div>
-      </div>
-      <!--Chat section-->
-      <div id="chatBoxContainer" style="display: none;">
-        <form action="/send_message" id="chatForm" method="POST">
-            <input type="text" name="user_message" id="userMessage" placeholder="Type your question..." required>
-            <button type="submit">Send</button>    
-        </form> 
+      <div id="leftSectionTitle" class="sectionTitle">Input Documents / Questions </div>
+      <div id="leftContentWrapper" class="contentWrapper">
+        <!--Upload section-->
+        <div id="uploadFormContainer">
+          <form action="/upload" method="POST" enctype="multipart/form-data">
+            <input type="file" name="pdf_file" accept=".pdf" required>
+            <button type="submit">Upload and Convert</button>
+          </form>
+        </div>
+        <!-- Progress wheel and message container -->
+        <div id="progressWheelContainer" style="display: none;">
+          <div id="progressWheel" class="lds-dual-ring"></div>
+          <div id="uploadMessage" style="display: none;"></div>
+        </div>
+        <!--Chat section-->
+        <div id="chatBoxContainer" style="display: none;">
+          <form action="/send_message" id="chatForm" method="POST">
+              <input type="text" name="user_message" id="userMessage" placeholder="Type your question..." required>
+              <button type="submit">Send</button>    
+          </form> 
+        </div>
       </div>
     </div>
 
     <!--Middle third-->
     <div id="middleContainer">
       <div id="middleSectionTitle" class="sectionTitle">Answer</div>
-      <!--Sematic answer section-->
-      <div id="semanticAnswer">Your answer will be displayed here.</div>
+      <div id="middleContentWrapper" class="contentWrapper">
+        <!--Sematic answer section-->
+        <div id="semanticAnswer">Your answer will be displayed here.</div>
+      </div>
     </div>
 
     <!--Right third-->
     <div id="rightContainer">
       <div id="rightSectionTitle" class="sectionTitle">Sources</div>
-      <!--Sources section-->
-      <div id="resultsContainer"></div>
+      <div id="rightContentWrapper" class="contentWrapper">
+        <!--Sources section-->
+        <div id="resultsContainer"></div>
+      </div>
     </div>
 
   </div>
-    
-
-
-
-
 
     
   <!---->
