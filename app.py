@@ -135,7 +135,7 @@ def upload_file():
 def send_message():
   user_message = request.form["user_message"]
   n_results = 5  
-  index_name = "pwc-risk"  # Replace this with your index name
+  index_name = 'gpt-hackathon'  # Replace this with your index name
 
   if user_message:
     query = user_message
