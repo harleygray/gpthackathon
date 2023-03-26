@@ -10,6 +10,8 @@ from langchain.chat_models import ChatOpenAI
 from langchain.prompts.chat import ChatPromptTemplate, HumanMessagePromptTemplate
 from pymongo import MongoClient
 from dotenv import load_dotenv
+from bson.binary import Binary
+import io
 
 load_dotenv()
 
@@ -18,8 +20,7 @@ load_dotenv()
 
 app = Flask(__name__, static_folder='static')
 app.secret_key = os.environ.get("FLASK_SECRET_KEY", "super_secret_key")
-app.config['UPLOAD_FOLDER'] = 'uploads'
-app.config['CONVERTED_FOLDER'] = 'converted_files'
+
 
 mongo_username = os.environ.get("MONGO_USERNAME")
 mongo_password = os.environ.get("MONGO_PASSWORD")
@@ -73,7 +74,6 @@ def allowed_file(filename):
 def index():
   return render_template('index.html')
 
-
 @app.route('/upload', methods=['POST'])
 def upload_file():
     logging.info("Upload request received.")
@@ -94,17 +94,25 @@ def upload_file():
         # Read file contents
         file_content = file.read()
 
+        # Store the original PDF file as a Binary object in MongoDB
+        pdf_binary = Binary(file_content)
+
         # Load and split PDF using LangChain's PyPDFLoader
-        loader = PyPDFLoader(file=file_content)
+        loader = PyPDFLoader(file=io.BytesIO(file_content))
         pages = loader.load_and_split()
 
         # Combine pages into one string
         text_content = '\n'.join([page.page_content for page in pages])
 
-        # Insert file into MongoDB
+        # Embed and upload the document to Pinecone
+        index_name = "your_index_name"
+        embed_document(filename, text_content, index_name)
+
+        # Insert file and its text content into MongoDB
         file_document = {
             'filename': filename,
-            'content': text_content
+            'content': text_content,
+            'pdf_file': pdf_binary
         }
         file_collection.insert_one(file_document)
 
@@ -113,8 +121,6 @@ def upload_file():
     else:
         flash('Invalid file format')
         return redirect(url_for('index'))
-
-
 
 @app.route("/send_message", methods=["POST"])
 def send_message():
