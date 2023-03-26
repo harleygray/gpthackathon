@@ -64,13 +64,11 @@ body{
 }
 
 #resultsContainer {
-    background-color: #f8f8f8; /* Light background color */
-    border: 1px solid #ccc; /* Border around the container */
-    border-radius: 4px; /* Rounded corners */
+    background-color: transparent; 
     padding: 20px; /* Add some padding inside the container */
     margin-bottom: 20px; /* Add some space below the container */
     overflow-y: auto; /* Enable vertical scrolling if the content is too long */
-    max-height: 500px; /* Set a maximum height for the container */
+    max-height: 800px; /* Set a maximum height for the container */
     width: 100%; /* Take up the full width of the parent container */
 }
   
@@ -232,7 +230,7 @@ body{
   
 #chatForm button[type="submit"] {
     padding: 5px 10px;
-    background-color: #2196F3;
+    background-color: #e0301e;
     color: white;
     border: none;
     border-radius: 3px;
