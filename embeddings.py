@@ -50,7 +50,7 @@ def embed_document(filename, text_content, index_name):
     print(f"Embedding document: {filename}")
     
     text_splitter = CharacterTextSplitter(separator="\n", chunk_size=1000, chunk_overlap=100)
-    docs = text_splitter.split(text_content)
+    docs = text_splitter.split_text(text_content)
     
     embeddings = OpenAIEmbeddings()
 
