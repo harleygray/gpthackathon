@@ -76,7 +76,7 @@ def index():
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
-    print("Upload request received.")
+    logging.info("Upload request received.")
     if 'pdf_file' not in request.files:
         flash('No file part')
         return redirect(url_for('index'))
@@ -88,7 +88,7 @@ def upload_file():
         return redirect(url_for('index'))
 
     if file and allowed_file(file.filename):
-        print(f"Processing file: {file.filename}")
+        logging.info(f"Processing file: {file.filename}")
         filename = secure_filename(file.filename)
         
         # Read file contents

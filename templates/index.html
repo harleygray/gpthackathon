@@ -28,6 +28,11 @@
           <button type="submit">Upload and Convert</button>
         </form>
       </div>
+      <!-- Progress wheel and message container -->
+      <div id="progressWheelContainer" style="display: none;">
+        <div id="progressWheel" class="lds-dual-ring"></div>
+        <div id="uploadMessage" style="display: none;"></div>
+      </div>
       <!--Chat section-->
       <div id="chatBoxContainer" style="display: none;">
         <form action="/send_message" id="chatForm" method="POST">
