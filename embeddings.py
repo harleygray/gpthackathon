@@ -46,11 +46,16 @@ logging.basicConfig(
 
 #print(docs[0].page_content)
 
+class TextWrapper:
+    def __init__(self, text):
+        self.page_content = text
+
+
 def embed_document(filename, text_content, index_name):
     print(f"Embedding document: {filename}")
     
     text_splitter = CharacterTextSplitter(separator="\n", chunk_size=1000, chunk_overlap=100)
-    docs = text_splitter.split_text(text_content)
+    docs = [TextWrapper(chunk) for chunk in text_splitter.split_text(text_content)]
     
     embeddings = OpenAIEmbeddings()
 
@@ -61,7 +66,6 @@ def embed_document(filename, text_content, index_name):
     )
 
     docsearch = Pinecone.from_documents(docs, embeddings, index_name=index_name)
-
 
 
 def query_index(query, n_results, index_name):
