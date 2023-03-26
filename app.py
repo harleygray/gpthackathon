@@ -1,7 +1,7 @@
 import os
 from flask import Flask, request, redirect, url_for, flash, render_template, jsonify, make_response
 from werkzeug.utils import secure_filename
-from langchain.document_loaders import c
+from langchain.document_loaders import PyPDFLoader
 from embeddings import query_index, embed_document
 from langchain.prompts import PromptTemplate
 from langchain.llms import OpenAI
