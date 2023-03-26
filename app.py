@@ -107,7 +107,7 @@ def upload_file():
         text_content = '\n'.join([page.page_content for page in pages])
 
         # Embed and upload the document to Pinecone
-        index_name = "your_index_name"
+        index_name = INDEX_NAME
         embed_document(filename, text_content, index_name)
 
         # Insert file and its text content into MongoDB
