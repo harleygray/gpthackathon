@@ -187,28 +187,29 @@ function displayResults(response) {
     resultsContainer.innerHTML = "";
   
     // Iterate over the results and display them
-  for (key in response.message) {
-    const result = response.message[key];
-    const resultDiv = document.createElement("details");
-    resultDiv.classList.add("source");
-    const summary = document.createElement("summary");
+    for (key in response.message) {
+        const result = response.message[key];
+        const resultDiv = document.createElement("details");
+        resultDiv.classList.add("source");
+        const summary = document.createElement("summary");
 
-    // Get the file name without the extension
-    const fileName = result.metadata.filename.replace(/\.[^/.]+$/, "");
+        // Extract the page number and file name from the page content
+        const pageInfoRegex = /^Page (\d+) of (.*?):/;
+        const pageInfoMatch = result.page_content.match(pageInfoRegex);
+        const pageNumber = pageInfoMatch[1];
+        const fileName = pageInfoMatch[2].replace(/\.[^/.]+$/, "");
 
-    summary.textContent = "Source " + (parseInt(key) + 1) + ": " + fileName;
-    resultDiv.appendChild(summary);
+        summary.textContent = `Source ${parseInt(key) + 1}: Page ${pageNumber} of ${fileName}`;
+        resultDiv.appendChild(summary);
 
-    // Remove the metadata section
-    // const metadata = document.createElement("pre");
-    // metadata.textContent = JSON.stringify(result.metadata, null, 2);
-    // resultDiv.appendChild(metadata);
+        const pageContent = document.createElement("div");
 
-    const pageContent = document.createElement("div");
-    pageContent.innerHTML = result.page_content;
-    resultDiv.appendChild(pageContent);
+        // Remove the prepended page information from the page content
+        const cleanedPageContent = result.page_content.replace(pageInfoRegex, "").trim();
+        pageContent.innerHTML = cleanedPageContent;
+        resultDiv.appendChild(pageContent);
 
-    resultsContainer.appendChild(resultDiv);
+        resultsContainer.appendChild(resultDiv);
     }
   }
   
