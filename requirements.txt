@@ -13,3 +13,4 @@ pydantic
 PyCryptodome
 httpx
 python-dotenv
+pymongo

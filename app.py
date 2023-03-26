@@ -8,16 +8,28 @@ from langchain.llms import OpenAI
 from langchain.chains import LLMChain
 from langchain.chat_models import ChatOpenAI
 from langchain.prompts.chat import ChatPromptTemplate, HumanMessagePromptTemplate
-
-
+from pymongo import MongoClient
 from dotenv import load_dotenv
 
 load_dotenv()
+
+
+
 
 app = Flask(__name__, static_folder='static')
 app.secret_key = os.environ.get("FLASK_SECRET_KEY", "super_secret_key")
 app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['CONVERTED_FOLDER'] = 'converted_files'
+
+mongo_username = os.environ.get("MONGO_USERNAME")
+mongo_password = os.environ.get("MONGO_PASSWORD")
+mongo_cluster_address = os.environ.get("MONGO_CLUSTER_ADDRESS")
+mongo_db_name = os.environ.get("MONGO_DB_NAME")
+MONGO_URI = f"mongodb+srv://{mongo_username}:{mongo_password}@{mongo_cluster_address}/{mongo_db_name}?retryWrites=true&w=majority"
+client = MongoClient(MONGO_URI)
+db = client.get_database(mongo_db_name)
+file_collection = db['files']
+
 
 NUMBER_RESULTS = 5
 INDEX_NAME = 'pwc-risk'
@@ -67,8 +79,6 @@ def index():
   return render_template('index.html')
 
 
-@app.route('/upload', methods=['POST'])
-def upload_file():
     if 'pdf_file' not in request.files:
         flash('No file part')
         return redirect(url_for('index'))
@@ -105,6 +115,43 @@ def upload_file():
         else:
             flash('File already uploaded and processed')
 
+        return redirect(url_for('index'))
+    else:
+        flash('Invalid file format')
+        return redirect(url_for('index'))
+@app.route('/upload', methods=['POST'])
+def upload_file():
+    if 'pdf_file' not in request.files:
+        flash('No file part')
+        return redirect(url_for('index'))
+
+    file = request.files['pdf_file']
+
+    if file.filename == '':
+        flash('No file selected')
+        return redirect(url_for('index'))
+
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        
+        # Read file contents
+        file_content = file.read()
+
+        # Load and split PDF using LangChain's PyPDFLoader
+        loader = PyPDFLoader(file=file_content)
+        pages = loader.load_and_split()
+
+        # Combine pages into one string
+        text_content = '\n'.join([page.page_content for page in pages])
+
+        # Insert file into MongoDB
+        file_document = {
+            'filename': filename,
+            'content': text_content
+        }
+        file_collection.insert_one(file_document)
+
+        flash('File uploaded and converted successfully')
         return redirect(url_for('index'))
     else:
         flash('Invalid file format')
