@@ -14,3 +14,4 @@ PyCryptodome
 httpx
 python-dotenv
 pymongo
+bson

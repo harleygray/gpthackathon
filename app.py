@@ -106,12 +106,12 @@ def upload_file():
         loader = PyPDFLoader(file_path=temp_path)
         pages = loader.load_and_split()
 
-        # Combine pages into one string with page number and file name prepended
-        text_content = '\n'.join([f"Page {i + 1} of {filename}: {page.page_content}" for i, page in enumerate(pages)])
+        # Create a list of pages without prepended information
+        pages_content = [page.page_content for page in pages]
         
         # Embed and upload the document to Pinecone
         index_name = INDEX_NAME
-        embed_document(filename, text_content, index_name)
+        embed_document(filename, pages_content, index_name)
 
         # Insert file and its text content into MongoDB
         file_document = {
